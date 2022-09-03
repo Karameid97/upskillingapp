@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	<h:form id="menuForm" >
+		<p:menubar id="menu">
+
+			<p:menuitem  value="#{msg.menu_home}" outcome="/home.xhtml"  icon="fa fa-home"  />
+
+			<p:submenu label="#{msg.menu_data}" icon="fa fa-database">
+				<p:menuitem value="#{msg.lbl_university}" outcome="/scured/university.xhtml" />
+				<p:menuitem value="#{msg.lbl_School}" outcome="/scured/school.xhtml" />
+				<p:menuitem value="#{msg.lbl_Program}" outcome="/scured/program.xhtml" />
+				<p:menuitem value="#{msg.lbl_training_course}" outcome="/scured/trainingCourse.xhtml" />
+			</p:submenu>
+
+			<p:submenu label="#{msg.menu_data_Student}" icon="fa fa-database">
+				<p:menuitem value="#{msg.lbl_student}" outcome="/scured/student.xhtml" />
+				<p:menuitem value="#{msg.lbl_studentTrainingCourse}" outcome="/scured/studentTrainingCourse.xhtml" />
+				<p:menuitem value="#{msg.lbl_Interview}" outcome="/scured/StudentInterview.xhtml" />
+				<p:menuitem value="#{msg.lbl_studentResult}" outcome="/scured/studentResult.xhtml" />
+
+			</p:submenu>
+
+			<p:submenu label="#{msg.menu_Add}" icon="fa fa-plus">
+				<p:menuitem value="#{msg.lbl_addUniversity}" outcome="/scured/add_University.xhtml" />
+				<p:menuitem value="#{msg.lbl_addSchool}" outcome="/scured/add_School.xhtml" />
+				<p:menuitem value="#{msg.lbl_addProram}" outcome="/scured/add_Program.xhtml" />
+				<p:menuitem value="#{msg.lbl_addTrainingCourse}" outcome="/scured/add_Trainingcourse.xhtml" />
+				<p:menuitem value="#{msg.lbl_addStudent}" outcome="/scured/add_Student.xhtml" />
+				<p:menuitem value="#{msg.lbl_addStudentTrainingCourse}" outcome="/scured/add_StudentTrainingCourse.xhtml" />
+				<p:menuitem value="#{msg.lbl_addInterview}" outcome="/scured/add_StudentInterview.xhtml" />
+				<p:menuitem value="#{msg.lbl_addStudentResult}" outcome="/scured/add_StudentResult.xhtml" />
+
+				<p:menuitem value="#{msg.lbl_eidtableSchool}" outcome="/scured/schoolEditable" />
+			</p:submenu>
+			<p:menuitem value="#{msg.menu_LogOut}" action="#{mbLog.logout()}" ajax="false" />
+		</p:menubar>
+		<p:sticky target="menu"></p:sticky>
+	</h:form>
+	<p:separator />
+</ui:composition>
+

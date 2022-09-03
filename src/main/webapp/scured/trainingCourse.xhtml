@@ -1,0 +1,102 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">TrainingCourse</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:panel>
+				<p:dataTable var="t" value="#{mbTCourse.courseTable}" widgetVar="courseTable" multiViewState="true" stickyHeader="true"
+					sortMode="multiple" filteredValue="#{mbTCourse.selectCourse}" selectionMode="single" rowKey="#{t.courseID}">
+
+					<f:facet name="header">
+						<p:outputLabel value="Training Course" />
+					</f:facet>
+
+
+					<p:column headerText="Course ID" sortBy="#{t.courseID}" filterBy="#{t.courseID}" filterMatchMode="contains">
+						<h:outputText value="#{t.courseID}" />
+					</p:column>
+
+					<p:column headerText="Course AName" sortBy="#{t.courseAname}" filterBy="#{t.courseAname}" filterMatchMode="contains">
+						<h:outputText value="#{t.courseAname}" />
+					</p:column>
+
+					<p:column headerText="Course EName" sortBy="#{t.courseEname}" filterBy="#{t.courseEname}" filterMatchMode="contains">
+						<h:outputText value="#{t.courseEname}" />
+					</p:column>
+
+					<p:column headerText="Max Student" sortBy="#{t.maxStudent}" filterBy="#{t.maxStudent}" filterMatchMode="contains">
+						<h:outputText value="#{t.maxStudent}" />
+					</p:column>
+
+					<p:column headerText="Short Desc" sortBy="#{t.shortDesc}" filterBy="#{t.shortDesc}" filterMatchMode="contains">
+						<h:outputText value="#{t.shortDesc.length()>30 ? t.shortDesc.substring(0,30):t.shortDesc}" />
+						<p:commandLink value="  more..." style="color: red" update="form:slctpnl" onclick="PF('coursDlg1').show()">
+							<f:setPropertyActionListener value="#{t}" target="#{mbTCourse.course}" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="Edit" style="width:70px">
+						<p:commandButton value="..." update=":form:editpnl" onclick="PF('coursDlg').show()">
+							<f:setPropertyActionListener value="#{t}" target="#{mbTCourse.trainCourse}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="Remove" style="width:70px">
+						<p:commandButton value="X" action="#{mbTCourse.delete()}" ajax="false">
+							<f:setPropertyActionListener value="#{t}" target="#{mbTCourse.trainCourse}" />
+						</p:commandButton>
+					</p:column>
+
+					<f:facet name="footer">
+						<p:outputLabel value="In total there are #{mbTCourse.courseTable.size()} Training Course" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+			<p:dialog header="Edit Training Course" widgetVar="coursDlg" modal="true">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="Course ID" />
+					<h:outputText value="#{mbTCourse.trainCourse.courseID}" />
+
+					<p:outputLabel value="Course Aname" />
+					<h:inputText value="#{mbTCourse.trainCourse.courseAname}" />
+
+					<p:outputLabel value="Course EName" />
+					<h:inputText value="#{mbTCourse.trainCourse.courseEname}" />
+
+					<p:outputLabel value="Max Student" />
+					<p:inputNumber value="#{mbTCourse.trainCourse.maxStudent}" />
+
+					<p:outputLabel value="Short Desc" />
+					<p:inputTextarea value="#{mbTCourse.trainCourse.shortDesc}" cols="30" rows="10" autoResize="true" maxlength="20" />
+
+
+
+					<f:facet name="footer">
+						<p:commandButton value="Save" action="#{mbTCourse.update()}" ajax="false" />
+						<p:commandButton value="Back" type="button" onclick="PF('coursDlg').hide()" />
+					</f:facet>
+
+				</p:panelGrid>
+			</p:dialog>
+
+			
+				<p:dialog header="select Desc" widgetVar="coursDlg1" modal="true"  width="500">
+				
+					<p:panelGrid id="slctpnl" columns="1" >
+						<h2>
+							<p:outputLabel value="Short Desc :" />
+						</h2>
+						<h:outputText  value="#{mbTCourse.course.shortDesc}" />
+						<f:facet name="footer">
+							<p:commandButton value="Back" type="button" onclick="PF('coursDlg1').hide()" />
+						</f:facet>
+
+
+					</p:panelGrid>
+				
+				</p:dialog>
+		
+		</h:form>
+	</ui:define>
+</ui:composition>

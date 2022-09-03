@@ -1,0 +1,103 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Add Student</ui:define>
+	<ui:define name="content">
+		<p:panel>
+			<h:form>
+				<p:growl id="growll" showDetail="true">
+					<p:autoUpdate />
+				</p:growl>
+				<div align="center">
+					<p:spacer height="80" />
+					<p:panelGrid columns="4" style="width: 80%; height: 20%">
+						<f:facet name="header">
+							<p:outputLabel value="#{msg.lbl_addStudent}" />
+						</f:facet>
+
+						<p:outputLabel value="#{msg.lbl_university}" for="uni" />
+						<p:selectOneMenu id="uni" value="#{addStu.student.studentUniversity.universityID}"  required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_university}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addStu.universityList}" var="u" itemLabel="#{mbLog.lang.equals('en')? u.universityEname : u.universityAname}"
+								itemValue="#{u.universityID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_School}" for="scho" />
+						<p:selectOneMenu id="scho" value="#{addStu.student.studentSchool.schoolID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_School}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addStu.schoolList}" var="s" itemLabel="#{mbLog.lang.equals('en')? s.schoolEname : s.schoolAname}"
+								itemValue="#{s.schoolID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_Program} " for="prog" />
+						<p:selectOneMenu id="prog" value="#{addStu.student.studentProgram.programID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_Program}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addStu.programList}" var="p" itemLabel="#{mbLog.lang.equals('en')? p.programEname : p.programAname}"
+								itemValue="#{p.programID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_student} #{msg.lbl_aname}" />
+						<p:inputText value="#{addStu.student.studentAname}" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_aname}"
+							validatorMessage="#{msg.msg_validate} #{msg.lbl_aname}" />
+
+						<p:outputLabel value="#{msg.lbl_student} #{msg.lbl_ename}" />
+						<p:inputText value="#{addStu.student.studentEname}" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_ename}"
+							validatorMessage="#{msg.msg_validate} #{msg.lbl_ename}" />
+
+						<p:outputLabel value="#{msg.lbl_mobile}" />
+						<p:inputText value="#{addStu.student.studentPhoneNo}" placeholder="ex: 0786666666" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_mobile}"
+							validatorMessage="#{msg.msg_validate} #{msg.lbl_mobile}">
+							<f:validateRegex pattern="^07[789][0-9]{7}$" />
+						</p:inputText>
+
+
+						<p:outputLabel value="#{msg.lbl_email}" />
+						<p:inputText id="n3" value="#{addStu.student.studentEmail}" placeholder="example@gmail.com" title="Email" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_email}" validatorMessage="#{msg.msg_validate} #{msg.lbl_email}">
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+
+						<p:outputLabel value="#{msg.lbl_brithday}" />
+						<p:calendar value="#{addStu.student.studentBirthDate}" pattern="dd/MM//yyyy" showOn="button" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_brithday}" />
+
+						<p:outputLabel value="#{msg.lbl_sex}" />
+						<p:selectOneRadio value="#{addStu.student.studentSex}" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_sex}">
+							<f:selectItem itemLabel="Male" itemValue="male" />
+							<f:selectItem itemLabel="Female" itemValue="femal" />
+						</p:selectOneRadio>
+
+						<p:outputLabel value="#{msg.lbl_studentFinalAverage}" />
+						<p:inputNumber value="#{addStu.student.studentFinalAverage}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_studentFinalAverage}" />
+
+						<p:outputLabel value="#{msg.lbl_studentMaxAverage}" />
+						<p:inputNumber value="#{addStu.student.studentMaxAverage}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_studentMaxAverage}" />
+
+						<p:outputLabel value="#{msg.lbl_StudentRate}" />
+						<p:inputNumber value="#{addStu.student.studentRate}" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_StudentRate}" />
+
+						<p:outputLabel value="#{msg.lbl_studentGradYear}" />
+						<p:inputNumber value="#{addStu.student.studentGradeYear}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_studentGradYear}" />
+
+						<p:outputLabel value="#{msg.lbl_studentGradSum}" />
+						<p:inputNumber value="#{addStu.student.studentGradeSum}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_studentGradSum}" />
+						<f:facet name="footer">
+							<p:commandButton value="#{msg.lbl_save}" action="#{addStu.save()}" ajax="false" />
+						</f:facet>
+
+					</p:panelGrid>
+				</div>
+			</h:form>
+		</p:panel>
+
+
+
+	</ui:define>
+</ui:composition>

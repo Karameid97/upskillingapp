@@ -1,0 +1,52 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Add Student Interview</ui:define>
+	<ui:define name="content">
+		<p:panel>
+			<h:form>
+				<p:growl id="growll" showDetail="true">
+					<p:autoUpdate />
+				</p:growl>
+				<div align="center">
+					<p:spacer height="80" />
+					<p:panelGrid columns="4" style="width: 80%; height: 20%">
+						<f:facet name="header">
+							<p:outputLabel value="#{msg.lbl_addInterview}" />
+
+						</f:facet>
+
+						<p:outputLabel value="#{msg.lbl_student}" for="stu" />
+						<p:selectOneMenu id="stu" value="#{mbaddinterv.interview.studentId.studentID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_student}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{mbaddinterv.studentList}" var="s" itemLabel="#{mbLog.lang.equals('en')? s.studentEname : s.studentAname}"
+								itemValue="#{s.studentID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_interviewDate}" />
+						<p:calendar value="#{mbaddinterv.interview.interviewDate}" pattern="dd/MM//yyyy" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_interviewDate}" showOn="button" />
+
+						<p:outputLabel value="#{msg.lbl_interviewTime}" />
+						<p:calendar value="#{mbaddinterv.interview.interviewTime}" pattern="HH:mm" timeOnly="true" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_interviewTime}"  />
+
+						<p:outputLabel value="#{msg.lbl_interviewDuration}" />
+						<p:calendar value="#{mbaddinterv.interview.interviewDuration}" pattern="HH:mm" timeOnly="true" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_interviewDuration}"  />
+
+						<p:clock />
+
+
+						<f:facet name="footer">
+							<p:commandButton value="#{msg.lbl_save}" action="#{mbaddinterv.insert()}" ajax="false" />
+
+						</f:facet>
+
+					</p:panelGrid>
+				</div>
+			</h:form>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

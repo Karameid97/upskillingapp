@@ -1,0 +1,112 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Student Interview</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form">
+			<p:panel>
+
+				<p:dataTable value="#{mbStuInter.studentInterviewTable}" id="table" var="s" stickyHeader="true" sortMode="multiple"
+					widgetVar="interviewTaple" filteredValue="#{mbStuInter.interviewSelect}">
+
+					<f:facet name="header">
+						<p:outputLabel value="Student Interview " />
+						<p:outputPanel>
+							<h:outputText value="Search all fields:" />
+							<p:inputText id="globalFilter" onkeyup="PF('interviewTaple').filter()" style="width:150px" placeholder="Enter keyword" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="student" filterBy="#{s.studentId.studentEname}">
+						<h:outputText value="#{s.studentId.studentEname}" />
+					</p:column>
+					<p:column headerText="iterview Date" filterBy="#{s.interviewDate}">
+						<h:outputText value="#{s.interviewDate}" />
+					</p:column>
+					<p:column headerText="Interview Time" filterBy="#{s.interviewTime}">
+						<h:outputText value="#{s.interviewTime }" />
+					</p:column>
+					<p:column headerText="Interview Duration" filterBy="#{s.interviewDuration}">
+						<h:outputText value="#{s.interviewDuration}" />
+					</p:column>
+					
+					<p:column headerText="Edit" style="width:70px">
+						<p:commandButton value="..." update=":form:editpnl" onclick="PF('SintervDlg').show()">
+							<f:setPropertyActionListener value="#{s}" target="#{mbStuInter.interview1}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="Remove" style="width:70px">
+						<p:commandButton value="X" action="#{mbStuInter.delete()}" ajax="false">
+							<f:setPropertyActionListener value="#{s}" target="#{mbStuInter.interview1}" />
+						</p:commandButton>
+					</p:column>
+					<f:facet name="footer">
+						<p:outputLabel value="Student Interview " />
+					</f:facet>
+
+				</p:dataTable>
+
+				<p:commandButton value="Send Email" update=":form:emailpnl" onclick="PF('intervDlg').show()" icon="fa fa-envelope">
+					<f:setPropertyActionListener value="#{s}" target="#{mbStuInter.interview}" />
+				</p:commandButton>
+
+			</p:panel>
+
+			<p:dialog header="Edit School" widgetVar="intervDlg" modal="true" width="600" height="500">
+				<p:panelGrid id="emailpnl" columns="2" style="width: 100%; height: 100%">
+
+					<p:outputLabel value="to " for="stu" />
+					<p:selectOneMenu id="stu" value="#{mbStuInter.student.studentEmail}">
+						<f:selectItems value="#{mbStuInter.studentemails}" var="s" itemLabel="#{s}" itemValue="#{s}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Subject" />
+					<p:inputText value="#{mbStuInter.subject}" style="width: 100%; height: 20%" />
+
+					<p:outputLabel value="body" />
+					<p:inputText value="#{mbStuInter.body }" style="width: 100%; height:90%" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Send" action="#{mbStuInter.sendEmail()}" ajax="false" icon="fa fa-paper-plane" />
+						<p:commandButton value="Back" type="button" onclick="PF('intervDlg').hide()" />
+					</f:facet>
+
+				</p:panelGrid>
+			</p:dialog>
+
+
+			<p:dialog header="Edit" widgetVar="SintervDlg" modal="true">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="#{msg.lbl_student}" />
+					<h:outputText value="#{mbStuInter.interview1.studentId.studentEname}" />
+
+					<p:outputLabel value="#{msg.lbl_interviewDate}" />
+					<p:calendar value="#{mbStuInter.interview1.interviewDate}" pattern="dd/MM//yyyy" showOn="button" />
+
+					<p:outputLabel value="#{msg.lbl_interviewTime}" />
+					<p:calendar value="#{mbStuInter.interview1.interviewTime}"  pattern="HH:mm" timeOnly="true" />
+
+					<p:outputLabel value="#{msg.lbl_interviewDuration}" />
+					<p:calendar value="#{mbStuInter.interview1.interviewDuration}" pattern="HH:mm"  timeOnly="true"/>
+
+					<f:facet name="footer">
+						<p:commandButton value="Save" action="#{mbStuInter.update()}" ajax="false" />
+						<p:commandButton value="Back" type="button" onclick="PF('SintervDlg').hide()" />
+					</f:facet>
+
+
+				</p:panelGrid>
+			</p:dialog>
+
+
+		</h:form>
+
+
+
+
+
+	</ui:define>
+</ui:composition>

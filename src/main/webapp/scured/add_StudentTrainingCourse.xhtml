@@ -1,0 +1,73 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Student Training Course</ui:define>
+	<ui:define name="content">
+		<p:panel>
+			<h:form>
+				<p:growl id="growll" showDetail="true">
+					<p:autoUpdate />
+				</p:growl>
+				<div align="center">
+					<p:spacer height="80" />
+
+					<p:panelGrid columns="2">
+
+						<f:facet name="header">
+							<p:outputLabel value="#{msg.lbl_studentTrainingCourse}" />
+						</f:facet>
+
+						<p:outputLabel value="#{msg.lbl_student}" for="stu" />
+						<p:selectOneMenu id="stu" value="#{addstuTraiCors.course.student.studentID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_student}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addstuTraiCors.studentList}" var="s" itemLabel="#{mbLog.lang.equals('en')? s.studentEname : s.studentAname}"
+								itemValue="#{s.studentID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_priority}" />
+						<p:spinner value="#{addstuTraiCors.course.priority}" min="1" max="3" required="true"
+							requiredMessage="#{msg.msg_required} (1-3) #{msg.lbl_priority}" />
+
+						<p:outputLabel value="#{msg.lbl_student} #{msg.lbl_training_course}" for="cor" />
+						<p:selectOneMenu id="cor" value="#{addstuTraiCors.course.trainingCourseID.courseID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_student} #{msg.lbl_training_course}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addstuTraiCors.courseList}" var="c" itemLabel="#{mbLog.lang.equals('en')? c.courseEname : c.courseAname}"
+								itemValue="#{c.courseID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_firstChoice}" for="cor1" />
+						<p:selectOneMenu id="cor1" value="#{addstuTraiCors.course.firstChoice.courseID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_firstChoice}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addstuTraiCors.course1}" var="c1" itemLabel="#{mbLog.lang.equals('en')? c1.courseEname : c1.courseAname}"
+								itemValue="#{c1.courseID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_secondChoice}" for="cor2" />
+						<p:selectOneMenu id="cor2" value="#{addstuTraiCors.course.secondChoice.courseID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_secondChoice}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addstuTraiCors.course2}" var="c2" itemLabel="#{mbLog.lang.equals('en')? c2.courseEname : c2.courseAname}"
+								itemValue="#{c2.courseID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_thirdChoice}" for="cor3" />
+						<p:selectOneMenu id="cor3" value="#{addstuTraiCors.course.thirdChoice.courseID}" required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_thirdChoice}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addstuTraiCors.course3}" var="c3" itemLabel="#{mbLog.lang.equals('en')? c3.courseEname : c3.courseAname}"
+								itemValue="#{c3.courseID}" />
+						</p:selectOneMenu>
+
+						<f:facet name="footer">
+							<p:commandButton value="#{msg.lbl_save}" action="#{addstuTraiCors.insert()}" ajax="false" />
+						</f:facet>
+
+					</p:panelGrid>
+				</div>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

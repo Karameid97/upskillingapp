@@ -1,0 +1,63 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Student Result</ui:define>
+	<ui:define name="content">
+		<p:panel>
+			<h:form>
+				<p:growl id="growll" showDetail="true">
+					<p:autoUpdate />
+				</p:growl>
+				<div align="center">
+					<p:spacer height="80" />
+					<p:panelGrid columns="2">
+					
+						<f:facet name="header">
+							<p:outputLabel value="#{msg.lbl_addStudentResult}" />
+						</f:facet>
+
+						<p:outputLabel value="#{msg.lbl_student}" for="stu" />
+						<p:selectOneMenu id="stu" value="#{addSturslt.result.studentID.studentID}"  required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_student}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addSturslt.studentList}" var="s" itemLabel="#{mbLog.lang.equals('en')? s.studentEname : s.studentAname}"
+								itemValue="#{s.studentID}" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.lbl_training_course}" for="cor" />
+						<p:selectOneMenu id="cor" value="#{addSturslt.result.trainingCourseID.courseID}"  required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_training_course}">
+							<f:selectItem itemLabel="#{msg.lbl_selectOne}" itemValue=" " />
+							<f:selectItems value="#{addSturslt.courseList}" var="c" itemLabel="#{mbLog.lang.equals('en')? c.courseEname : c.courseAname}"
+								itemValue="#{c.courseID}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_englishMark}" />
+						<p:inputNumber value="#{addSturslt.result.englishMark}"  required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_englishMark}"  />
+						
+						<p:outputLabel value="#{msg.lbl_interviewMark}" />
+						<p:inputNumber value="#{addSturslt.result.interviewMark}"  required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_interviewMark}"/>
+
+						<p:outputLabel value="#{msg.lbl_acceptedFlag}" />
+						<p:selectOneRadio value="#{addSturslt.result.acceptedFlag}"  required="true"
+							requiredMessage="#{msg.msg_required} #{msg.lbl_acceptedFlag}">
+							<f:selectItem itemLabel="true" itemValue="true" />
+							<f:selectItem itemLabel="false" itemValue="false" />
+						</p:selectOneRadio>
+
+						<p:outputLabel value="Note" />
+						<p:inputTextarea value="#{addSturslt.result.notes}" cols="30" rows="10" autoResize="true" maxlength="20" />
+						
+						<f:facet name="footer">
+							<p:commandButton value="#{msg.lbl_save}" action="#{addSturslt.insert()}" ajax="false" />
+						</f:facet>
+
+					</p:panelGrid>
+				</div>
+			</h:form>
+		</p:panel>
+.
+	</ui:define>
+</ui:composition>

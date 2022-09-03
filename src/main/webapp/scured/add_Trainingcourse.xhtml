@@ -1,0 +1,43 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Add Training Course</ui:define>
+	<ui:define name="content">
+	<p:panel>
+		<h:form>
+		<p:growl id="growll"  showDetail="true" >
+					<p:autoUpdate />
+				</p:growl>
+				<div align="center">
+				<p:spacer height="80" />
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<p:outputLabel value="#{msg.lbl_addTrainingCourse}" />
+				</f:facet>
+
+				<p:outputLabel value="#{msg.lbl_training_course} #{msg.lbl_aname}" for="aname" />
+				<p:inputText id="aname" value="#{addTrainCrs.course.courseAname}" maxlength="35" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_aname}"
+					validatorMessage="#{msg.msg_validate} #{msg.lbl_aname}" />
+
+				<p:outputLabel value="#{msg.lbl_training_course} #{msg.lbl_ename}" />
+				<p:inputText value="#{ addTrainCrs.course.courseEname}" maxlength="35" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_ename}"
+					validatorMessage="#{msg.msg_validate} #{msg.lbl_ename}" />
+
+				<p:outputLabel value="#{msg.lbl_maxStudent}" />
+				<p:spinner value="#{addTrainCrs.course.maxStudent}"  min="1" max="15"   required="true"
+					requiredMessage="#{msg.msg_required} #{msg.lbl_maxStudent}"/>
+
+				<p:outputLabel value="#{msg.lbl_shortDesc}"/>
+				<p:inputTextarea value="#{addTrainCrs.course.shortDesc}" required="true" cols="30" rows="10" autoResize="true"  maxlength="20" requiredMessage="#{msg.msg_required} #{msg.lbl_shortDesc}" />
+
+				<f:facet name="footer">
+					<p:commandButton value="#{msg.lbl_save}" action="#{addTrainCrs.insert()}" ajax="false" />
+				</f:facet>
+
+			</p:panelGrid>
+			</div>
+		</h:form>
+	</p:panel>
+	</ui:define>
+</ui:composition>
+

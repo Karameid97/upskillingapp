@@ -1,0 +1,111 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">StudentTrainingCourse</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form">
+			<p:panel>
+
+				<p:dataTable value="#{mbstc.sTCourseTable}" id="table" var="s" paginator="true" rows="#{mbstc.sTCourseTable.size()}"
+					paginatorTemplate="{PageLinks} {RowsPerPageDropdown}" rowsPerPageTemplate="1,#{mbStu.studentTable.size()}" stickyHeader="true"
+					sortMode="multiple" widgetVar="courseTaple" filteredValue="#{mbstc.selectCourse}">
+
+					<f:facet name="header">
+						<p:outputLabel value="Student Training Course " />
+						<p:outputPanel>
+							<h:outputText value="Search all fields:" />
+							<p:inputText id="globalFilter" onkeyup="PF('courseTaple').filter()" style="width:150px" placeholder="Enter keyword" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="student" filterBy="#{s.student.studentEname}">
+						<h:outputText value="#{s.student.studentEname}" />
+					</p:column>
+					<p:column headerText="Student training course" filterBy="#{s.trainingCourseID.courseEname}">
+						<h:outputText value="#{s.trainingCourseID.courseEname}" style="color:red" />
+					</p:column>
+					<p:column headerText="priority" filterBy="#{s.priority}">
+						<h:outputText value="#{s.priority}" />
+					</p:column>
+
+					<p:column headerText="First Choice" filterBy="#{s.firstChoice}">
+						<h:outputText value="#{s.firstChoice.courseEname}" />
+					</p:column>
+					<p:column headerText="Second Choice" filterBy="#{s.secondChoice}">
+						<h:outputText value="#{s.secondChoice.courseEname}" />
+					</p:column>
+					<p:column headerText="Third Choice" filterBy="#{s.thirdChoice}">
+						<h:outputText value="#{s.thirdChoice.courseEname}" />
+					</p:column>
+
+					<p:column headerText="Edit" style="width:70px">
+						<p:commandButton value="..." update=":form:editpnl" onclick="PF('StcDlg').show()">
+							<f:setPropertyActionListener value="#{s}" target="#{mbstc.sTCourse}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="Remove" style="width:70px">
+						<p:commandButton value="X" action="#{mbstc.delete()}" ajax="false">
+							<f:setPropertyActionListener value="#{s}" target="#{mbstc.sTCourse}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog header="Edit" widgetVar="StcDlg" modal="true">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="Sctudeny" />
+					<h:outputText value="#{mbstc.sTCourse.student.studentEname}" />
+
+					
+					
+					<p:outputLabel value="#{msg.lbl_student} #{msg.lbl_training_course}" for="cor" />
+					<p:selectOneMenu id="cor" value="#{mbstc.sTCourse.trainingCourseID.courseID}" required="true"
+						requiredMessage="#{msg.msg_required} #{msg.lbl_firstChoice}">
+						<f:selectItems value="#{mbstc.courseList}" var="c1" itemLabel="#{mbLog.lang.equals('en')? c1.courseEname : c1.courseAname}"
+							itemValue="#{c1.courseID}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="priority" />
+					<p:spinner value="#{mbstc.sTCourse.priority}" min="1" max="3" />
+					
+					
+					<p:outputLabel value="#{msg.lbl_firstChoice}" for="cor1" />
+					<p:selectOneMenu id="cor1" value="#{mbstc.sTCourse.firstChoice.courseID}" required="true"
+						requiredMessage="#{msg.msg_required} #{msg.lbl_firstChoice}">
+						<f:selectItems value="#{mbstc.course1}" var="c1" itemLabel="#{mbLog.lang.equals('en')? c1.courseEname : c1.courseAname}"
+							itemValue="#{c1.courseID}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg.lbl_secondChoice}" for="cor2" />
+					<p:selectOneMenu id="cor2" value="#{mbstc.sTCourse.secondChoice.courseID}" required="true"
+						requiredMessage="#{msg.msg_required} #{msg.lbl_secondChoice}">
+						<f:selectItems value="#{mbstc.course2}" var="c2" itemLabel="#{mbLog.lang.equals('en')? c2.courseEname : c2.courseAname}"
+							itemValue="#{c2.courseID}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg.lbl_thirdChoice}" for="cor3" />
+					<p:selectOneMenu id="cor3" value="#{mbstc.sTCourse.thirdChoice.courseID}" required="true"
+						requiredMessage="#{msg.msg_required} #{msg.lbl_thirdChoice}">
+						<f:selectItems value="#{mbstc.course3}" var="c3" itemLabel="#{mbLog.lang.equals('en')? c3.courseEname : c3.courseAname}"
+							itemValue="#{c3.courseID}" />
+					</p:selectOneMenu>
+
+					<f:facet name="footer">
+						<p:commandButton value="Save" action="#{mbstc.update()}" ajax="false" />
+						<p:commandButton value="Back" type="button" onclick="PF('StcDlg').hide()" />
+					</f:facet>
+
+
+				</p:panelGrid>
+			</p:dialog>
+
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>

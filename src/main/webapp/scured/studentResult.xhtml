@@ -1,0 +1,101 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Student Result</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:panel>
+
+				<p:dataTable id="table" var="s" value="#{mbStuRlt.resultTable}" sortMode="multiple" filteredValue="#{mbStuRlt.selectResult}"
+					stickyHeader="true" widgetVar="rsltable">
+
+					<f:facet name="header">
+						<p:outputLabel value="Student Result" />
+						<p:outputPanel>
+							<h:outputText value="Search all fields:" />
+							<p:inputText id="globalFilter" onkeyup="PF('rsltable').filter()" style="width:150px" placeholder="Enter keyword" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="Student" filterBy="#{s.studentID.studentEname}" sortBy="#{s.studentID.studentEname}">
+						<h:outputText value="#{s.studentID.studentEname}" />
+					</p:column>
+
+					<p:column headerText="Course" filterBy="#{s.trainingCourseID.courseEname}" sortBy="#{s.trainingCourseID.courseEname}">
+						<h:outputText value="#{s.trainingCourseID.courseEname}" />
+					</p:column>
+
+					<p:column headerText="English Mark" filterBy="#{s.englishMark}" sortBy="#{s.englishMark}">
+						<h:outputText value="#{s.englishMark}" />
+					</p:column>
+
+					<p:column headerText="interview Mark" filterBy="#{s.interviewMark}" sortBy="#{s.interviewMark}">
+						<h:outputText value="#{s.interviewMark}" />
+					</p:column>
+
+					<p:column headerText="Accepted Flag" filterBy="#{s.acceptedFlag}" sortBy="#{s.acceptedFlag}">
+						<h:outputText value="#{s.acceptedFlag}" />
+					</p:column>
+
+					<p:column headerText="Notes">
+						<h:outputText value="#{s.notes}" />
+					</p:column>
+					
+					<p:column headerText="Edit" style="width:70px">
+						<p:commandButton value="..." update=":form:editpnl" onclick="PF('stuRltDlg').show()">
+							<f:setPropertyActionListener value="#{s}" target="#{mbStuRlt.result}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="Remove" style="width:70px">
+						<p:commandButton value="X" action="#{mbStuRlt.delete()}" ajax="false">
+							<f:setPropertyActionListener value="#{s}" target="#{mbStuRlt.result}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+			</p:panel>
+
+			<p:dialog header="Edit Student" widgetVar="stuRltDlg" modal="true">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="#{msg.lbl_student}"/>
+					<h:outputText value="#{mbStuRlt.result.studentID.studentEname}" />
+
+					<p:outputLabel value="#{msg.lbl_training_course}" for="cor" />
+					<p:selectOneMenu id="cor" value="#{mbStuRlt.result.trainingCourseID.courseID}" required="true"
+						requiredMessage="#{msg.msg_required} #{msg.lbl_training_course}">
+						<f:selectItems value="#{mbStuRlt.courseList}" var="c" itemLabel="#{mbLog.lang.equals('en')? c.courseEname : c.courseAname}"
+							itemValue="#{c.courseID}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg.lbl_englishMark}" />
+					<p:inputNumber value="#{mbStuRlt.result.englishMark}" required="true" requiredMessage="#{msg.msg_required} #{msg.lbl_englishMark}" />
+
+					<p:outputLabel value="#{msg.lbl_interviewMark}" />
+					<p:inputNumber value="#{mbStuRlt.result.interviewMark}" required="true"
+						requiredMessage="#{msg.msg_required} #{msg.lbl_interviewMark}" />
+
+					<p:outputLabel value="#{msg.lbl_acceptedFlag}" />
+					<p:selectOneRadio value="#{addSturslt.result.acceptedFlag}" required="true"
+						requiredMessage="#{msg.msg_required} #{msg.lbl_acceptedFlag}">
+						<f:selectItem itemLabel="true" itemValue="true" />
+						<f:selectItem itemLabel="false" itemValue="false" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="Note" />
+					<p:inputTextarea value="#{mbStuRlt.result.notes}" cols="30" rows="10" autoResize="true" maxlength="20" />
+					<f:facet name="footer">
+						<p:commandButton value="Save" action="#{mbStuRlt.update()}" ajax="false" />
+						<p:commandButton value="Back" type="button" onclick="PF('stuRltDlg').hide()" />
+					</f:facet>
+
+				</p:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>

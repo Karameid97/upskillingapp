@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="school" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32fe9a79-73ee-4b26-b95f-cc7c755941d4">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ScottXE"/>
+	<queryString language="SQL">
+		<![CDATA[select*from school]]>
+	</queryString>
+	<field name="SCHOOL_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOL_ID"/>
+	</field>
+	<field name="SCHOOL_ANAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOL_ANAME"/>
+	</field>
+	<field name="SCHOOL_ENAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOL_ENAME"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="185" y="0" width="185" height="30" uuid="3e365587-b327-4427-9323-21932c86bddc"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="20" isBold="false" isItalic="false" isUnderline="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<text><![CDATA[SCHOOL REPORT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="185" height="30" forecolor="#FCF5F5" backcolor="#FF0905" uuid="ca532d9e-5aa5-4634-987e-3dc6592901dc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a43c7151-7665-4d17-814a-e3f806575515"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCHOOL_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="185" y="0" width="185" height="30" forecolor="#FCF5F5" backcolor="#FF0905" uuid="bc3ee4e3-e0b9-4fbe-8489-6bff1ddfee39">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3b6202d6-e7f4-49f0-a757-ff3ed184216d"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCHOOL_ANAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="ContainerHeight" mode="Opaque" x="370" y="0" width="185" height="30" forecolor="#FCF5F5" backcolor="#FF0905" uuid="8aaf1deb-a27e-4a8a-86b9-72f991ccedb4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95dd63f8-9d80-4365-9294-d988b8de6bb7"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SCHOOL_ENAME]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="185" height="30" uuid="576e79bf-cc3b-4aa2-898a-134ff20b3050">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a43c7151-7665-4d17-814a-e3f806575515"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph lineSpacing="Proportional" leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SCHOOL_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="185" y="0" width="185" height="30" uuid="f3da3021-4485-40a8-91be-fd0fd0d24f96">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3b6202d6-e7f4-49f0-a757-ff3ed184216d"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph lineSpacing="Proportional" leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SCHOOL_ANAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="185" height="30" uuid="aa1214ae-8d91-4a6a-b32a-5821b9c809f5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95dd63f8-9d80-4365-9294-d988b8de6bb7"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph lineSpacing="Proportional" leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SCHOOL_ENAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

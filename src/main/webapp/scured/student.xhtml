@@ -1,0 +1,174 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Student</ui:define>
+	<ui:define name="content">
+
+		<h:form id="form">
+			<p:panel>
+				<p:dataTable id="table" var="s" value="#{mbStu.studentTable}" paginator="true" rows="#{mbStu.studentTable.size()}"
+					paginatorTemplate="{PageLinks} {RowsPerPageDropdown}" rowsPerPageTemplate="1,#{mbStu.studentTable.size()}" stickyHeader="true"
+					sortMode="multiple" filteredValue="#{mbStu.selectStudent}" selectionMode="single" selection="#{mbStu.stuSelect}"
+					rowKey="#{s.studentID}" widgetVar="studentTaple" >
+
+
+					<p:ajax event="rowSelect" listener="#{mbStu.onRowSelect}" update=":form:showpnl" oncomplete="PF('stuDlgDet').show()" />
+
+					<f:facet name="header">
+						<p:outputLabel value="Student Table " />
+						<p:outputPanel>
+							<h:outputText value="Search all fields:" />
+							<p:inputText id="globalFilter" onkeyup="PF('studentTaple').filter()" style="width:150px" placeholder="Enter keyword" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="Student ID" sortBy="#{s.studentID}" filterBy="#{s.studentID}" filterMatchMode="contains">
+						<h:outputText value="#{s.studentID}" />
+					</p:column>
+
+					<p:column headerText="School Name" sortBy="#{mbLog.lang.equals('en')? s.studentEname : s.studentAname}"
+						filterBy="#{mbLog.lang.equals('en')? s.studentEname : s.studentAname}" filterMatchMode="contains">
+						<h:outputText value="#{mbLog.lang.equals('en')? s.studentEname : s.studentAname}" />
+					</p:column>
+
+					<p:column headerText="Edit" style="width:65px" >
+						<p:commandButton value="..." update=":form:editpnl" onclick="PF('stuDlg').show()" icon="fa fa-fw fa-edit">
+							<f:setPropertyActionListener value="#{s}" target="#{mbStu.student}" />
+						</p:commandButton>
+					</p:column>
+					
+					<p:column headerText="Show" style="width:65px">
+						<p:commandButton value="info" update=":form:showpnl" onclick="PF('stuDlgDet').show()" icon="fa fa-user" >
+							<f:setPropertyActionListener value="#{s}" target="#{mbStu.stuSelect}" />
+						</p:commandButton>
+					</p:column>
+					
+					<p:column headerText="Remove" style="width:65px">
+						<p:commandButton value="X" action="#{mbStu.delete()}" ajax="false" icon="fa fa-fw fa-remove">
+							<f:setPropertyActionListener value="#{s}" target="#{mbStu.student}" />
+						</p:commandButton>
+					</p:column>
+
+
+
+					<f:facet name="footer">
+						<p:outputLabel value="In total there are #{mbStu.studentTable.size()} Student" />
+					</f:facet>
+
+				</p:dataTable>
+			</p:panel>
+
+
+			<p:contextMenu for="table">
+				<p:menuitem value="View" update="showpnl" icon="pi pi-search" oncomplete="PF('stuDlgDet').show()" target="#{mbStu.student}" />
+				<ui:remove>
+					<p:menuitem value="Eidet" update="editpnl" icon="pi pi-search" oncomplete="PF('stuDlg').show()" />
+				</ui:remove>
+			</p:contextMenu>
+
+
+			<p:dialog header="Student Detail" widgetVar="stuDlgDet" modal="true">
+				<p:panelGrid id="showpnl" columns="2" >
+
+					<p:outputLabel value="Student ID" />
+					<h:outputText value="#{mbStu.stuSelect.studentID}" />
+					<p:outputLabel value="University" />
+					<h:outputText
+						value="#{mbLog.lang.equals('en')? mbStu.stuSelect.studentUniversity.universityEname : mbStu.stuSelect.studentUniversity.universityAname}" />
+					<p:outputLabel value="School " />
+					<h:outputText value="#{mbLog.lang.equals('en')? mbStu.stuSelect.studentSchool.schoolEname : mbStu.stuSelect.studentSchool.schoolAname}" />
+					<p:outputLabel value="Program " />
+					<h:outputText
+						value="#{mbLog.lang.equals('en')? mbStu.stuSelect.studentProgram.programEname : mbStu.stuSelect.studentProgram.programAname}" />
+
+					<p:outputLabel value="student Aname" />
+					<h:outputText value="#{mbStu.stuSelect.studentAname}" />
+					<p:outputLabel value="student Ename" />
+					<h:outputText value="#{mbStu.stuSelect.studentEname}" />
+					<p:outputLabel value="Mobile" />
+					<h:outputText value="#{mbStu.stuSelect.studentPhoneNo}" />
+					<p:outputLabel value="Email" />
+					<h:outputText value="#{mbStu.stuSelect.studentEmail}" />
+					<p:outputLabel value="BirthDay" />
+					<h:outputText value="#{mbStu.stuSelect.studentBirthDate}" />
+					<p:outputLabel value="Sex" />
+					<h:outputText value="#{mbStu.stuSelect.studentSex}" />
+
+					<p:outputLabel value="studentFinalAverage" />
+					<h:outputText value="#{mbStu.stuSelect.studentFinalAverage}" />
+					<p:outputLabel value="studentMaxAverage" />
+					<h:outputText value="#{mbStu.stuSelect.studentMaxAverage}" />
+					<p:outputLabel value="studentRate" />
+					<h:outputText value="#{mbStu.stuSelect.studentRate}" />
+					<p:outputLabel value="studentGradYear" />
+					<h:outputText value="#{mbStu.stuSelect.studentGradeYear}" />
+					<p:outputLabel value="studentGradSume" />
+					<h:outputText value="#{mbStu.stuSelect.studentGradeSum}" />
+
+				</p:panelGrid>
+			</p:dialog>
+
+
+			<p:dialog header="Edit Student" widgetVar="stuDlg" modal="true">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="Student ID" />
+					<h:outputText value="#{mbStu.student.studentID}" />
+					
+					<p:outputLabel value="University" for="uni" />
+					<p:selectOneMenu id="uni" value="#{mbStu.student.studentUniversity.universityID}">
+						<f:selectItems value="#{mbStu.universityTable}" var="u" itemLabel="#{mbLog.lang.equals('en')? u.universityEname : u.universityAname}"
+							itemValue="#{u.universityID}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="School " for="scho" />
+					<p:selectOneMenu id="scho" value="#{mbStu.student.studentSchool.schoolID}">
+						<f:selectItems value="#{mbStu.schoolTable}" var="s" itemLabel="#{mbLog.lang.equals('en')? s.schoolEname : s.schoolAname}"
+							itemValue="#{s.schoolID}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Program " for="prog" />
+					<p:selectOneMenu id="prog" value="#{mbStu.student.studentProgram.programID}">
+						<f:selectItems value="#{mbStu.programTable}" var="p" itemLabel="#{mbLog.lang.equals('en')? p.programEname : p.programAname}"
+							itemValue="#{p.programID}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="student Aname" />
+					<h:inputText value="#{mbStu.student.studentAname}" />
+					<p:outputLabel value="student Ename" />
+					<h:inputText value="#{mbStu.student.studentEname}" />
+					<p:outputLabel value="Mobile" />
+					<p:inputNumber value="#{mbStu.student.studentPhoneNo}" />
+					<p:outputLabel value="Email" />
+					<p:inputText id="n3" value="#{mbStu.student.studentEmail}" placeholder="Enter Email" title="Email" />
+					<p:outputLabel value="BirthDay" />
+					<p:calendar value="#{mbStu.student.studentBirthDate}" />
+					<p:outputLabel value="Sex" />
+					<p:selectOneRadio value="#{mbStu.student.studentSex}">
+						<f:selectItem itemLabel="Male" itemValue="male" />
+						<f:selectItem itemLabel="Female" itemValue="femal" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="studentFinalAverage" />
+					<p:inputNumber value="#{mbStu.student.studentFinalAverage}" />
+					<p:outputLabel value="studentMaxAverage" />
+					<p:inputNumber value="#{mbStu.student.studentMaxAverage}" />
+					<p:outputLabel value="studentRate" />
+					<p:inputNumber value="#{mbStu.student.studentRate}" />
+					<p:outputLabel value="studentGradYear" />
+					<p:inputNumber value="#{mbStu.student.studentGradeYear}" />
+					<p:outputLabel value="studentGradSume" />
+					<p:inputNumber value="#{mbStu.student.studentGradeSum}" />
+					<f:facet name="footer">
+						<p:commandButton value="Save" action="#{mbStu.update()}" ajax="false" />
+						<p:commandButton value="Back" type="button" onclick="PF('stuDlg').hide()" />
+					</f:facet>
+
+				</p:panelGrid>
+			</p:dialog>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+

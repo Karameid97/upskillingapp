@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{mbLog.lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+<f:view locale="#{mbLog.local}">
+
+	<h:head>
+		<title><ui:insert name="title">UpSkilling</ui:insert></title>
+		<link rel="icon" type="image/png" href="#{resource['icons/icon.png']}" />
+	</h:head>
+
+	<h:body dir="#{mbLog.dir}">
+
+		<h:outputStylesheet name="css/project.css" />
+
+		<p:panel id="pnl" style="min-height: 400px;">
+
+			<ui:include src="/WEB-INF/include/header.xhtml" />
+
+			<p:panel id="contentPnl" rendered="#{mbLog.login}" style="min-height: 400px;">
+
+				<ui:include src="/WEB-INF/include/main-menu.xhtml" />
+
+				<ui:insert name="content">
+					<h1>Inser your code here</h1>
+					<h2>Inser your code here</h2>
+					<h3>Inser your code here</h3>
+					<h4>Inser your code here</h4>
+					<h5>Inser your code here</h5>
+					<h6>Inser your code here</h6>
+				</ui:insert>
+
+			</p:panel>
+
+			<p:panel id="loginPnl" rendered="#{!mbLog.login}" style="min-height: 400px;">
+				<ui:include src="/WEB-INF/include/login.xhtml" />
+			</p:panel>
+
+			<ui:include src="/WEB-INF/include/footer.xhtml" />
+		</p:panel>
+
+	</h:body>
+</f:view>
+</html>

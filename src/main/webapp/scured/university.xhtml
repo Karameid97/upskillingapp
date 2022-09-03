@@ -1,0 +1,101 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">University</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+
+
+			<p:panel>
+				<p:commandButton dir="ltr" value=" Report" action="#{mbUni.runUniversityReport()}" ajax="false" icon="fa fa-fw fa-download" />
+
+				<p:dataGrid id="table" var="u" value="#{mbUni.universityTable}" columns="4" layout="grid" sortMode="multiple" stickyHeader="true"
+					filteredValue="#{mbUni.selecetUniver}">
+
+					<f:facet name="header">
+						<p:outputLabel value="University Table" />
+					</f:facet>
+
+					<p:panel header="#{u.universityID}" style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+
+							<h:outputText value="#{mbLog.lang.equals('en') ? u.universityEname :u.universityAname}" />
+
+							<h:commandLink value="#{u.website}" action="#{mbUni.web(u)}" target="_blank" style="color:blue" />
+
+							<p:commandButton value="..." update=":form:eidtPanel" onclick="PF('uniDlg').show()">
+								<f:setPropertyActionListener value="#{u}" target="#{mbUni.university}" />
+							</p:commandButton>
+
+
+
+							<p:commandButton value="X" action="#{mbUni.delete()}" ajax="false">
+								<f:setPropertyActionListener value="#{u}" target="#{mbUni.university}" />
+							</p:commandButton>
+
+						</h:panelGrid>
+					</p:panel>
+
+					<ui:remove>
+						<p:column headerText="University ID" sortBy="#{u.universityID}" filterBy="#{u.universityID}" filterMatchMode="contains">
+							<h:outputText value="#{u.universityID}" />
+						</p:column>
+
+						<p:column headerText="University Name" sortBy="#{mbLog.lang.equals('en') ? u.universityEname :u.universityAname}"
+							filterBy="#{mbLog.lang.equals('en') ? u.universityEname :u.universityAname}" filterMatchMode="contains">
+							<h:outputText value="#{mbLog.lang.equals('en') ? u.universityEname :u.universityAname}" />
+						</p:column>
+
+
+
+						<p:column headerText="Website" sortBy="#{u.website}" filterBy="#{u.website}" filterMatchMode="contains">
+							<h:commandLink value="#{u.website}" action="#{mbUni.web(u)}" target="_blank" style="color:blue" />
+						</p:column>
+
+						<p:column headerText="Eidt" style="width:70px">
+							<p:commandButton value="..." update=":form:eidtPanel" onclick="PF('uniDlg').show()">
+								<f:setPropertyActionListener value="#{u}" target="#{mbUni.university}" />
+							</p:commandButton>
+						</p:column>
+
+						<p:column headerText="Remove" style="width:70px">
+							<p:commandButton value="X" action="#{mbUni.delete()}" ajax="false">
+								<f:setPropertyActionListener value="#{u}" target="#{mbUni.university}" />
+							</p:commandButton>
+						</p:column>
+					</ui:remove>
+
+					<f:facet name="footer">
+						<p:outputLabel value="In total there are #{mbUni.universityTable.size()} University" />
+					</f:facet>
+
+				</p:dataGrid>
+			</p:panel>
+
+			<p:dialog header="Edit University" widgetVar="uniDlg" modal="true">
+				<p:panelGrid id="eidtPanel" columns="2">
+
+					<p:outputLabel value="University ID" />
+					<h:outputText value="#{mbUni.university.universityID}" />
+
+					<p:outputLabel value="University AName" />
+					<h:inputText value="#{mbUni.university.universityAname}" />
+
+					<p:outputLabel value="University EName" />
+					<h:inputText value="#{mbUni.university.universityEname}" />
+
+					<p:outputLabel value="Website" />
+					<h:inputText value="#{mbUni.university.website}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Save" action="#{mbUni.update()}" ajax="false" />
+						<p:commandButton value="Back" type="button" onclick="PF('uniDlg').hide()" />
+					</f:facet>
+
+				</p:panelGrid>
+			</p:dialog>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,79 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Program</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:panel>
+				<p:dataTable var="p" value="#{mbprog.programTable}" stickyHeader="true" sortMode="multiple" filteredValue="#{mbprog.selectProgram}">
+
+					<f:facet name="header">
+						<p:outputLabel value="Program Table" />
+					</f:facet>
+
+					<p:column headerText="School Ename" sortBy="#{mbLog.lang.equals('en')? p.school.schoolEname : p.school.schoolAname }" filterBy="#{mbLog.lang.equals('en')? p.school.schoolEname : p.school.schoolAname }" filterMatchMode="contains">
+						<h:outputText value="#{mbLog.lang.equals('en')? p.school.schoolEname : p.school.schoolAname }" /> 
+					</p:column>
+
+					<p:column headerText="Program ID" sortBy="#{p.programID}" filterBy="#{p.programID}" filterMatchMode="contains">
+						<h:outputText value="#{p.programID}" />
+					</p:column>
+
+					<p:column headerText="Program AName" sortBy="#{p.programAname}" filterBy="#{p.programAname}" filterMatchMode="contains">
+						<h:outputText value="#{p.programAname}" />
+					</p:column>
+
+					<p:column headerText="Program EName" sortBy="#{p.programEname}" filterBy="#{p.programEname}" filterMatchMode="contains">
+						<h:outputText value="#{p.programEname}" />
+					</p:column>
+
+					<p:column headerText="Edit" style="width:70px">
+						<p:commandButton value="..." update=":form:editpnl" onclick="PF('progDlg').show()">
+							<f:setPropertyActionListener value="#{p}" target="#{mbprog.program}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="Remove" style="width:70px">
+						<p:commandButton value="X" action="#{mbprog.delete()}" ajax="false">
+							<f:setPropertyActionListener value="#{p}" target="#{mbprog.program}" />
+						</p:commandButton>
+					</p:column>
+
+					<f:facet name="footer">
+						<p:outputLabel value="In total there are #{mbprog.programTable.size()} Program" />
+					</f:facet>
+
+				</p:dataTable>
+				
+				<p:commandButton  value=" Report" action="#{mbprog.runProgramReport()}" ajax="false" icon="fa fa-fw fa-download"/>
+				
+			</p:panel>
+
+			<p:dialog header="Edit Program" widgetVar="progDlg" modal="true">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="School Ename" />
+					<h:outputText value="#{mbLog.lang.equals('en')? mbprog.program.school.schoolEname : mbprog.program.school.schoolAname }" />
+
+					<p:outputLabel value="Program ID" />
+					<h:outputText value="#{mbprog.program.programID}" />
+
+					<p:outputLabel value="Program AName" />
+					<h:inputText value="#{mbprog.program.programAname}" />
+
+					<p:outputLabel value="Program EName" />
+					<h:inputText value="#{mbprog.program.programEname}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Save" action="#{mbprog.update()}" ajax="false" />
+						<p:commandButton value="Back" type="button" onclick="PF('progDlg').hide()" />
+					</f:facet>
+
+				</p:panelGrid>
+			</p:dialog>
+
+
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>

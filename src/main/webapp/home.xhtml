@@ -1,0 +1,66 @@
+<ui:composition template="/WEB-INF/template/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">UpSkilling</ui:define>
+	<ui:define name="content">
+
+		<h:form>
+			<h:graphicImage value="/resources/img/HTU.png" width="1400" />
+		</h:form>
+		<h:form>
+
+			<p:separator />
+
+			<p:carousel numVisible="1" effect="easeInStrong" headerText="Tabs" style="margin-bottom:0">
+				<p:tab>
+					<h:panelGrid columns="2" cellpadding="10">
+
+						<h:outputText value="About This Program:"  style="font-weight: bold"/>
+						<h:outputText
+							value="In January 2019, Al Hussein Technical University (HTU) launched the National ICT Upskilling programme in collaboration with the Ministry of Digital Economy and Entrepreneurship (MoDEE). The programme aims to arm job-seeking ICT graduates with skills that are likely to improve their chances of finding employment opportunities in advanced technologies.
+							Below are the tracks provided depending on the industry needs:" />
+
+					</h:panelGrid>
+				</p:tab>
+				<p:tab>
+					<h:panelGrid columns="2" cellpadding="10">
+						<h:outputText value="More About This Program's Goals :" style="font-weight: bold" />
+						<h:outputText
+							value="The programme trained 1,000 university graduates in skill-scarce fields over the course of two years (2019 and 2020), ultimately contributing to the talent pool of the IT sector in Jordan.Job-seeking graduates undertook 340 contact hours of intensive applied practical training at HTU which include :" />
+					</h:panelGrid>
+				</p:tab>
+
+			</p:carousel>
+
+
+
+
+
+			<p:panelGrid columns="4"  >
+				<h:graphicImage value="/resources/img/App development (Android).jpg" width="330" />
+				<h:graphicImage value="/resources/img/App development (Flutter).jpg" width="330" />
+				<h:graphicImage value="/resources/img/Cloud Computing (aws).jpg" width="330" />
+				<h:graphicImage value="/resources/img/Cloud Computing (Azure).jpg" width="330" />
+				<h:graphicImage value="/resources/img/Appian Rapid Application Development.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Computer Networks (CCNA).jpg" width="305" />
+				<h:graphicImage value="/resources/img/Cybersecurity.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Data Analytics And Visualization.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Data Science.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Linux administration.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Mendix Rapid Application Development.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Mixed Reality Development using Unity.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Web development technology.jpg" width="305" />
+				<h:graphicImage value="/resources/img/SQL Database administration.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Programming in Csharp.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Programming in PHP.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Programming in Java.jpg" width="305" />
+				<h:graphicImage value="/resources/img/Programming in Python.jpg" width="305" />
+			</p:panelGrid>
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>
+
+
